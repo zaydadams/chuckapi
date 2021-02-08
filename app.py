@@ -6,8 +6,11 @@ app = Flask(__name__)
 @app.route('/')
 def get_chuck_norris_jokes():
     api_url = "https://api.chucknorris.io/jokes/random"
-    response = requests.get(api_url).json() +
-    image_tag = 'img src="https://assets.chucknorris.host/img/avatar/chuck-norris.png">'
+    response = requests.get(api_url).json()
+    image_tag = "<img src=" + response['icon_url'] + " alt='Chuck Norris Image'>"
 
 
-    return response['value']
+    return response['value'] + image_tag
+
+if __name__ == '__main__':
+    app.run()
